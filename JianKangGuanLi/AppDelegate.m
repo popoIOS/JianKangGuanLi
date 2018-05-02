@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "IQKeyboardManager.h"
 
 @interface AppDelegate ()
 
@@ -16,8 +17,55 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+
+//    [NSThread sleepForTimeInterval:10];
+    self.window.backgroundColor = [UIColor whiteColor];
+    /*
+     设置IQKeyBoard键盘
+     */
+    [self setIQKeyBoard];
+    /*
+     主页面展示
+     */
+    [self setMainViewController];
+    
     return YES;
+}
+
+#pragma mark------IQKeyBoard
+-(void)setIQKeyBoard{
+    [IQKeyboardManager sharedManager].enable = YES;
+    [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
+}
+#pragma mark------主页面展示
+-(void)setMainViewController{
+    
+    HomeViewController *home = [[HomeViewController alloc]init];
+    home.tabBarItem.title = @"首页";
+    home.title = @"首页";
+    home.tabBarItem.image = [UIImage imageNamed:@"d1_h"];
+    home.tabBarItem.selectedImage = [UIImage imageNamed:@"d1"];
+    BaseNavigationController *navHome = [[BaseNavigationController alloc]initWithRootViewController:home];
+    
+    
+    HealthDataViewController *healthData = [[HealthDataViewController alloc]init];
+    healthData.tabBarItem.title = @"健康数据";
+//    healthData.title = @"健康数据";
+    healthData.tabBarItem.image = [UIImage imageNamed:@"d2_h"];
+    healthData.tabBarItem.selectedImage = [UIImage imageNamed:@"d2"];
+    BaseNavigationController *navhealthData = [[BaseNavigationController alloc]initWithRootViewController:healthData];
+    
+    PersonalViewController *personal = [[PersonalViewController alloc]init];
+    personal.tabBarItem.title = @"个人中心";
+    personal.title = @"个人中心";
+    personal.tabBarItem.image = [UIImage imageNamed:@"d4_h"];
+    personal.tabBarItem.selectedImage = [UIImage imageNamed:@"d4"];
+    BaseNavigationController *navPersonal = [[BaseNavigationController alloc]initWithRootViewController:personal];
+    
+    UITabBarController *tabBar =[[UITabBarController alloc]init];
+    tabBar.viewControllers = @[navHome,navhealthData,navPersonal];
+    self.window.rootViewController = tabBar;
+    [self.window makeKeyWindow];
 }
 
 

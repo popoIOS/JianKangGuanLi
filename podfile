@@ -1,0 +1,8 @@
+platform :ios, ‘8.0’ 
+target ‘JianKangGuanLi’ do
+   pod 'AFNetworking', '~> 3.0'
+   pod 'IQKeyboardManager'
+   pod 'BabyBluetooth','~> 0.7.0'
+   pod "MWPhotoBrowser"
+   pod 'pop', '~> 1.0'
+end
